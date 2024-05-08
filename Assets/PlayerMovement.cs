@@ -4,6 +4,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public float jumpForce = 10f;
+    public float gravityScale = 2f; // Adjust gravity scale for falling
     public Transform groundCheck;
     public LayerMask groundMask;
 
@@ -20,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     {
         // Check if player is grounded
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundMask);
+        Debug.Log("Is Grounded: " + isGrounded);
 
         // Check for right mouse button click
         if (Input.GetMouseButtonDown(1))
@@ -32,10 +34,18 @@ public class PlayerMovement : MonoBehaviour
         float verticalMoveInput = canMoveUpDown ? Input.GetAxisRaw("Vertical") : 0f; // Only allow vertical movement if canMoveUpDown is true
         rb.velocity = new Vector2(moveInput * moveSpeed, verticalMoveInput * moveSpeed);
 
-        // Jumping
+        // Apply gravity if not grounded and not allowed to move up/down
+        if (!isGrounded && !canMoveUpDown)
+        {
+            rb.velocity += Vector2.down * gravityScale * 2; // Apply gravity by adding a downward velocity
+        }
+
+        /* Jumping
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
+        */
     }
+
 }
