@@ -40,10 +40,12 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = new Vector2(moveInput * moveSpeed, verticalMoveInput * moveSpeed);
 
         // Apply gravity if not grounded and not allowed to move up/down
+        
         if (!isGrounded && !canMoveUpDown)
         {
-            rb.velocity += Vector2.down * gravityScale * 2; // Apply gravity by adding a downward velocity
+            rb.velocity += Vector2.down * 3; // Apply gravity by adding a downward velocity
         }
+        
 
         if (isGrounded && canMoveUpDown)
         {
@@ -55,37 +57,6 @@ public class PlayerMovement : MonoBehaviour
         }
         
         CircleCollider2D playerCollider = GetComponent<CircleCollider2D>();
-
-        /*
-        if (isTouchingBarrier)
-        {
-            Debug.Log("Player X position: " + transform.position.x);
-            Debug.Log("Barrier X position: " + barrierCheck.position.x);
-            // If touching a barrier, prevent movement in the direction of the barrier
-            if (moveInput > 0 && transform.position.x > barrierCheck.position.x)
-            {
-                // Player is moving right and touching a barrier on their right, so prevent movement right
-                rb.velocity = new Vector2(0f, rb.velocity.y);
-                
-            }
-            else if (moveInput < 0 && transform.position.x < barrierCheck.position.x)
-            {
-                // Player is moving left and touching a barrier on their left, so prevent movement left
-                rb.velocity = new Vector2(0f, rb.velocity.y);
-            }
-                //up
-            if (verticalMoveInput > 0 && transform.position.y > barrierCheck.position.y)
-            {
-                // Player is moving up and touching a barrier above, so prevent movement up
-                rb.velocity = new Vector2(rb.velocity.x, 0f);
-            }
-            else if (verticalMoveInput < 0 && transform.position.y < barrierCheck.position.y)
-            {
-                // Player is moving down and touching a barrier below, so prevent movement down
-                verticalMoveInput = 0f;
-            }
-        }
-        */
 
         /* Jumping
         if (Input.GetButtonDown("Jump") && isGrounded)
