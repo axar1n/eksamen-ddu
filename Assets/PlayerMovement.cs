@@ -56,6 +56,7 @@ public class PlayerMovement : MonoBehaviour
         
         CircleCollider2D playerCollider = GetComponent<CircleCollider2D>();
 
+        /*
         if (isTouchingBarrier)
         {
             Debug.Log("Player X position: " + transform.position.x);
@@ -84,7 +85,7 @@ public class PlayerMovement : MonoBehaviour
                 verticalMoveInput = 0f;
             }
         }
-
+        */
 
         /* Jumping
         if (Input.GetButtonDown("Jump") && isGrounded)
